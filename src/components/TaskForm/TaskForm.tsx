@@ -16,7 +16,7 @@ const TaskForm: React.FC<Props> = ({ onAddTask }) => {
   }
 
   return (
-    <form onSubmit={onSubmit}>
+    <form data-testid="task-form" onSubmit={onSubmit}>
       <input
         value={text}
         onChange={onChange}

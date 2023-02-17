@@ -9,7 +9,7 @@ interface Props {
 
 const TaskList: React.FC<Props> = ({ tasks, onCompleteTask }) => {
   return (
-    <ul>
+    <ul data-testid="task-list">
       {tasks.map((task) => (
         <TaskItem key={task.id} task={task} onCompleteTask={onCompleteTask} />
       ))}
