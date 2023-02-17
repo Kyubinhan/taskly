@@ -34,6 +34,10 @@ describe("<App />", () => {
     })
   }
 
+  beforeEach(() => {
+    localStorage.clear()
+  })
+
   it("renders TaskForm and TaskList", () => {
     render(<App />)
 

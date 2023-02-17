@@ -1,7 +1,8 @@
 import React, { useState } from "react"
 import { v4 } from "uuid"
+import { useLocalStorage } from "usehooks-ts"
 
-import { Task, TaskFilterOption } from "src/types"
+import { LocalStorageKey, Task, TaskFilterOption } from "src/types"
 import TaskForm from "src/components/TaskForm"
 import TaskList from "src/components/TaskList"
 import TaskFilterSelect from "src/components/TaskFilterSelect"
@@ -13,7 +14,10 @@ interface Props {
 }
 
 const App: React.FC<Props> = ({ tasks: defaultTasks }) => {
-  const [tasks, setTasks] = useState<Task[]>(defaultTasks || [])
+  const [tasks, setTasks] = useLocalStorage<Task[]>(
+    LocalStorageKey.TASKS,
+    defaultTasks || []
+  )
   const [filterOption, setFilterOption] = useState<TaskFilterOption>(
     TaskFilterOption.ALL
   )
