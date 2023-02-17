@@ -5,6 +5,7 @@ import TaskForm from "src/components/TaskForm"
 import TaskList from "src/components/TaskList"
 import TaskFilterSelect from "src/components/TaskFilterSelect"
 import { TaskFilterOption } from "src/components/TaskFilterSelect/TaskFilterSelect"
+import ActiveTaskCount from "src/components/ActiveTaskCount"
 import { Task } from "src/Types/Task"
 
 interface Props {
@@ -46,13 +47,15 @@ const App: React.FC<Props> = ({ tasks: defaultTasks }) => {
     }
     return t.completed === true
   })
+  const activeTaskCount = tasks.filter((t) => t.completed === false).length
 
   return (
-    <div className="App">
+    <main className="App">
       <TaskForm onAddTask={onAddTask} />
       <TaskFilterSelect onFilterChange={setFilterOption} />
+      <ActiveTaskCount count={activeTaskCount} />
       <TaskList tasks={tasksToDisplay} onCompleteTask={onCompleteTask} />
-    </div>
+    </main>
   )
 }
 

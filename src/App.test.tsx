@@ -18,6 +18,14 @@ describe("<App />", () => {
       completed: true,
     },
   ]
+  const addTask = (text: string) => {
+    fireEvent.change(screen.getByTestId("task-input"), {
+      target: {
+        value: text,
+      },
+    })
+    fireEvent.click(screen.getByTestId("task-submit-btn"))
+  }
 
   it("renders TaskForm and TaskList", () => {
     render(<App />)
@@ -29,12 +37,7 @@ describe("<App />", () => {
   it("creates new task", () => {
     render(<App />)
 
-    fireEvent.change(screen.getByTestId("task-input"), {
-      target: {
-        value: "task 1",
-      },
-    })
-    fireEvent.click(screen.getByTestId("task-submit-btn"))
+    addTask("task 1")
 
     screen.getByText("task 1")
   })
@@ -69,5 +72,15 @@ describe("<App />", () => {
     ])
     screen.getByText("task 2")
     expect(screen.queryByTestId("task 1")).toBeFalsy()
+  })
+
+  it("displays active task count", () => {
+    render(<App tasks={defaultTasks} />)
+
+    screen.getByText(/active tasks: 1/i)
+
+    addTask("task 3")
+
+    screen.getByText(/active tasks: 2/i)
   })
 })
