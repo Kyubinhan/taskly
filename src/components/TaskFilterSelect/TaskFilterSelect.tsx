@@ -1,10 +1,6 @@
 import React from "react"
 
-export enum TaskFilterOption {
-  ALL = "all",
-  ACTIVE = "active",
-  COMPLETED = "completed",
-}
+import { TaskFilterOption } from "src/types"
 
 interface Props {
   onFilterChange: (option: TaskFilterOption) => void

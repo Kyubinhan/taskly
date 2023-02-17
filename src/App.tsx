@@ -1,13 +1,12 @@
 import React, { useState } from "react"
 import { v4 } from "uuid"
 
+import { Task, TaskFilterOption } from "src/types"
 import TaskForm from "src/components/TaskForm"
 import TaskList from "src/components/TaskList"
 import TaskFilterSelect from "src/components/TaskFilterSelect"
-import { TaskFilterOption } from "src/components/TaskFilterSelect/TaskFilterSelect"
 import ActiveTaskCount from "src/components/ActiveTaskCount"
-import { Task } from "src/Types/Task"
-import TaskSearchInput from "./components/TaskSearchInput"
+import TaskSearchInput from "src/components/TaskSearchInput"
 
 interface Props {
   tasks?: Task[] // for testing purpose
@@ -47,7 +46,6 @@ const App: React.FC<Props> = ({ tasks: defaultTasks }) => {
       return `(?=.*${x})`
     })
     .join("")
-
   const tasksToDisplay = tasks.filter((t) => {
     if (!t.text.match(new RegExp(searchPattern, "gi"))) return false
 

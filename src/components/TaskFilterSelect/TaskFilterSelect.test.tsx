@@ -2,7 +2,8 @@ import React from "react"
 import { render, screen } from "@testing-library/react"
 import userEvent from "@testing-library/user-event"
 
-import TaskFilterSelect, { TaskFilterOption } from "./TaskFilterSelect"
+import { TaskFilterOption } from "src/types"
+import TaskFilterSelect from "./TaskFilterSelect"
 
 describe("<TaskFilterSelect />", () => {
   const defaultProps = { onFilterChange: () => {} }

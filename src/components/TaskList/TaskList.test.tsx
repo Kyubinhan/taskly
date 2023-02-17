@@ -1,7 +1,7 @@
 import React from "react"
 import TaskList from "./TaskList"
 import { render, screen, fireEvent } from "@testing-library/react"
-import { Task } from "src/Types/Task"
+import { Task } from "src/types/Task"
 
 describe("<TaskList />", () => {
   const sampleTasks: Task[] = [
