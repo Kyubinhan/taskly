@@ -2,20 +2,30 @@ import React from "react"
 import { render, screen } from "@testing-library/react"
 import userEvent from "@testing-library/user-event"
 
-import TaskFilterSelect from "./TaskFilterSelect"
+import TaskFilterSelect, { TaskFilterOption } from "./TaskFilterSelect"
 
-describe("<TaskFilters />", () => {
+describe("<TaskFilterSelect />", () => {
   const defaultProps = { onFilterChange: () => {} }
-  it("has select", () => {
-    render(<TaskFilterSelect {...defaultProps} />)
+  const setup = (props = defaultProps) => {
+    render(<TaskFilterSelect {...props} />)
 
-    screen.getByTestId("task-filter-select")
+    const select = screen.getByTestId("task-filter-select")
+
+    return {
+      select,
+    }
+  }
+
+  it("has select", () => {
+    const { select } = setup()
+
+    expect(select).toBeTruthy()
   })
 
   it("selects an option", () => {
-    render(<TaskFilterSelect {...defaultProps} />)
+    const { select } = setup()
 
-    userEvent.selectOptions(screen.getByTestId("task-filter-select"), ["all"])
+    userEvent.selectOptions(select, [TaskFilterOption.ALL])
 
     expect(
       screen.getByRole<HTMLOptionElement>("option", { name: "All" }).selected
@@ -24,10 +34,10 @@ describe("<TaskFilters />", () => {
 
   it("calls onFilterChange", () => {
     const onFilterChange = jest.fn()
-    render(<TaskFilterSelect onFilterChange={onFilterChange} />)
+    const { select } = setup({ onFilterChange })
 
-    userEvent.selectOptions(screen.getByTestId("task-filter-select"), ["all"])
+    userEvent.selectOptions(select, [TaskFilterOption.ALL])
 
-    expect(onFilterChange).toBeCalledWith("all")
+    expect(onFilterChange).toBeCalledWith(TaskFilterOption.ALL)
   })
 })
