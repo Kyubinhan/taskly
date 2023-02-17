@@ -26,6 +26,13 @@ describe("<App />", () => {
     })
     fireEvent.click(screen.getByTestId("task-submit-btn"))
   }
+  const searchTask = (text: string) => {
+    fireEvent.change(screen.getByTestId("task-search-input"), {
+      target: {
+        value: text,
+      },
+    })
+  }
 
   it("renders TaskForm and TaskList", () => {
     render(<App />)
@@ -82,5 +89,23 @@ describe("<App />", () => {
     addTask("task 3")
 
     screen.getByText(/active tasks: 2/i)
+  })
+
+  it("searchs tasks by keyword", () => {
+    render(<App tasks={defaultTasks} />)
+    screen.getByText("task 1")
+    screen.getByText("task 2")
+
+    // Search by keyword 'task 2'
+    searchTask("task 2")
+    expect(screen.queryByText("task 1")).toBeFalsy()
+    screen.getByText("task 2")
+
+    // Search by keyword 'fun task'
+    addTask("Fun task")
+    searchTask("fun task")
+    expect(screen.queryByText("task 1")).toBeFalsy()
+    expect(screen.queryByText("task 2")).toBeFalsy()
+    screen.getByText("Fun task")
   })
 })

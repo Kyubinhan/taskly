@@ -7,6 +7,7 @@ import TaskFilterSelect from "src/components/TaskFilterSelect"
 import { TaskFilterOption } from "src/components/TaskFilterSelect/TaskFilterSelect"
 import ActiveTaskCount from "src/components/ActiveTaskCount"
 import { Task } from "src/Types/Task"
+import TaskSearchInput from "./components/TaskSearchInput"
 
 interface Props {
   tasks?: Task[] // for testing purpose
@@ -17,6 +18,7 @@ const App: React.FC<Props> = ({ tasks: defaultTasks }) => {
   const [filterOption, setFilterOption] = useState<TaskFilterOption>(
     TaskFilterOption.ALL
   )
+  const [search, setSearch] = useState("")
 
   const onAddTask = (text: string) => {
     const newTask = {
@@ -39,7 +41,16 @@ const App: React.FC<Props> = ({ tasks: defaultTasks }) => {
     )
   }
 
+  const searchPattern = search
+    .split("")
+    .map((x) => {
+      return `(?=.*${x})`
+    })
+    .join("")
+
   const tasksToDisplay = tasks.filter((t) => {
+    if (!t.text.match(new RegExp(searchPattern, "gi"))) return false
+
     if (filterOption === TaskFilterOption.ALL) {
       return true
     } else if (filterOption === TaskFilterOption.ACTIVE) {
@@ -52,6 +63,7 @@ const App: React.FC<Props> = ({ tasks: defaultTasks }) => {
   return (
     <main className="App">
       <TaskForm onAddTask={onAddTask} />
+      <TaskSearchInput onSearchTask={setSearch} />
       <TaskFilterSelect onFilterChange={setFilterOption} />
       <ActiveTaskCount count={activeTaskCount} />
       <TaskList tasks={tasksToDisplay} onCompleteTask={onCompleteTask} />
