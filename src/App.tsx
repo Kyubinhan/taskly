@@ -3,6 +3,8 @@ import { v4 } from "uuid"
 
 import TaskForm from "src/components/TaskForm"
 import TaskList from "src/components/TaskList"
+import TaskFilterSelect from "src/components/TaskFilterSelect"
+import { TaskFilterOption } from "src/components/TaskFilterSelect/TaskFilterSelect"
 import { Task } from "src/Types/Task"
 
 interface Props {
@@ -11,6 +13,9 @@ interface Props {
 
 const App: React.FC<Props> = ({ tasks: defaultTasks }) => {
   const [tasks, setTasks] = useState<Task[]>(defaultTasks || [])
+  const [filterOption, setFilterOption] = useState<TaskFilterOption>(
+    TaskFilterOption.ALL
+  )
 
   const onAddTask = (text: string) => {
     const newTask = {
@@ -33,10 +38,20 @@ const App: React.FC<Props> = ({ tasks: defaultTasks }) => {
     )
   }
 
+  const tasksToDisplay = tasks.filter((t) => {
+    if (filterOption === TaskFilterOption.ALL) {
+      return true
+    } else if (filterOption === TaskFilterOption.ACTIVE) {
+      return t.completed === false
+    }
+    return t.completed === true
+  })
+
   return (
     <div className="App">
       <TaskForm onAddTask={onAddTask} />
-      <TaskList tasks={tasks} onCompleteTask={onCompleteTask} />
+      <TaskFilterSelect onFilterChange={setFilterOption} />
+      <TaskList tasks={tasksToDisplay} onCompleteTask={onCompleteTask} />
     </div>
   )
 }

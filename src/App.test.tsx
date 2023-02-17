@@ -1,6 +1,9 @@
 import React from "react"
-import App from "./App"
 import { render, screen, fireEvent } from "@testing-library/react"
+import userEvent from "@testing-library/user-event"
+
+import App from "src/App"
+import { TaskFilterOption } from "src/components/TaskFilterSelect/TaskFilterSelect"
 
 describe("<App />", () => {
   const defaultTasks = [
@@ -8,6 +11,11 @@ describe("<App />", () => {
       id: "1",
       text: "task 1",
       completed: false,
+    },
+    {
+      id: "2",
+      text: "task 2",
+      completed: true,
     },
   ]
 
@@ -37,7 +45,29 @@ describe("<App />", () => {
     const task = screen.getByText("task 1")
     expect(task).not.toHaveStyle("text-decoration: line-through;")
 
-    fireEvent.click(screen.getByTestId("task-done-btn"))
+    fireEvent.click(screen.getAllByTestId("task-done-btn")[0])
     expect(task).toHaveStyle("text-decoration: line-through;")
+  })
+
+  it("filters tasks", () => {
+    render(<App tasks={defaultTasks} />)
+
+    // Display all tasks as default
+    screen.getByText("task 1")
+    screen.getByText("task 2")
+
+    // Display active tasks only
+    userEvent.selectOptions(screen.getByTestId("task-filter-select"), [
+      TaskFilterOption.ACTIVE,
+    ])
+    screen.getByText("task 1")
+    expect(screen.queryByTestId("task 2")).toBeFalsy()
+
+    // Display completed tasks only
+    userEvent.selectOptions(screen.getByTestId("task-filter-select"), [
+      TaskFilterOption.COMPLETED,
+    ])
+    screen.getByText("task 2")
+    expect(screen.queryByTestId("task 1")).toBeFalsy()
   })
 })
