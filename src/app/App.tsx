@@ -8,6 +8,9 @@ import TaskList from "src/components/TaskList"
 import TaskFilterSelect from "src/components/TaskFilterSelect"
 import ActiveTaskCount from "src/components/ActiveTaskCount"
 import TaskSearchInput from "src/components/TaskSearchInput"
+import TopBar from "src/components/TopBar"
+
+import "./style.css"
 
 interface Props {
   tasks?: Task[] // for testing purpose
@@ -63,13 +66,16 @@ const App: React.FC<Props> = ({ tasks: defaultTasks }) => {
   const activeTaskCount = tasks.filter((t) => t.completed === false).length
 
   return (
-    <main className="App">
-      <TaskForm onAddTask={onAddTask} />
-      <TaskSearchInput onSearchTask={setSearch} />
-      <TaskFilterSelect onFilterChange={setFilterOption} />
-      <ActiveTaskCount count={activeTaskCount} />
-      <TaskList tasks={tasksToDisplay} onCompleteTask={onCompleteTask} />
-    </main>
+    <>
+      <TopBar />
+      <section>
+        <TaskForm onAddTask={onAddTask} />
+        <TaskSearchInput onSearchTask={setSearch} />
+        <TaskFilterSelect onFilterChange={setFilterOption} />
+        <ActiveTaskCount count={activeTaskCount} />
+        <TaskList tasks={tasksToDisplay} onCompleteTask={onCompleteTask} />
+      </section>
+    </>
   )
 }
 
