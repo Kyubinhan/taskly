@@ -2,7 +2,7 @@ import React from "react"
 import { render, screen, fireEvent } from "@testing-library/react"
 import userEvent from "@testing-library/user-event"
 
-import App from "src/App"
+import App from "src/app"
 import { TaskFilterOption } from "src/types"
 
 describe("<App />", () => {
