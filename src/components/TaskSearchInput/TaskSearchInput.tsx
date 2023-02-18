@@ -1,3 +1,6 @@
+import InputAdornment from "@mui/material/InputAdornment"
+import TextField from "@mui/material/TextField"
+import SearchIcon from "@mui/icons-material/Search"
 import React from "react"
 
 interface Props {
@@ -10,11 +13,20 @@ const TaskSearchInput: React.FC<Props> = ({ onSearchTask }) => {
   }
 
   return (
-    <input
-      type="text"
-      data-testid="task-search-input"
+    <TextField
       onChange={onChange}
-      placeholder="Search task by keyword"
+      placeholder="Search tasks"
+      size="small"
+      inputProps={{
+        "data-testid": "task-search-input",
+      }}
+      InputProps={{
+        startAdornment: (
+          <InputAdornment position="start">
+            <SearchIcon />
+          </InputAdornment>
+        ),
+      }}
     />
   )
 }
