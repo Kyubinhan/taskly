@@ -38,6 +38,7 @@ const TaskItem: React.FC<Props> = ({ task, onToggleTask }) => {
           primary={text}
           sx={{
             textDecoration: completed ? "line-through" : "none",
+            whiteSpace: "pre-wrap", // show line break & tap,
           }}
           data-testid="task-text"
         />
