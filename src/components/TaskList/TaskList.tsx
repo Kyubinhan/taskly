@@ -8,14 +8,14 @@ import styles from "./style.module.css"
 
 interface Props {
   tasks: Task[]
-  onCompleteTask: (id: string) => void
+  onToggleTask: (id: string) => void
 }
 
-const TaskList: React.FC<Props> = ({ tasks, onCompleteTask }) => {
+const TaskList: React.FC<Props> = ({ tasks, onToggleTask }) => {
   return (
     <List className={styles.list} data-testid="task-list" disablePadding>
       {tasks.map((task) => (
-        <TaskItem key={task.id} task={task} onCompleteTask={onCompleteTask} />
+        <TaskItem key={task.id} task={task} onToggleTask={onToggleTask} />
       ))}
     </List>
   )

@@ -60,11 +60,11 @@ describe("<App />", () => {
   it("completes task", () => {
     render(<App tasks={defaultTasks} />)
 
-    const task = screen.getByText("task 1")
-    expect(task).not.toHaveStyle("text-decoration: line-through;")
+    const firstTask = screen.getAllByTestId("task-text")[0]
+    expect(firstTask).not.toHaveStyle("text-decoration: line-through;")
 
-    fireEvent.click(screen.getAllByTestId("task-done-btn")[0])
-    expect(task).toHaveStyle("text-decoration: line-through;")
+    fireEvent.click(screen.getAllByTestId("task-checkbox")[0])
+    expect(firstTask).toHaveStyle("text-decoration: line-through;")
   })
 
   it("filters tasks", () => {

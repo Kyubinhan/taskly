@@ -10,11 +10,11 @@ describe("<TaskItem />", () => {
     completed: false,
   }
 
-  const initialProps = { task: sampleTask, onCompleteTask: () => {} }
+  const initialProps = { task: sampleTask, onToggleTask: () => {} }
   const setup = (props = {}) => {
     render(<TaskItem {...initialProps} {...props} />)
     const span = screen.getByTestId("task-text")
-    const button = screen.getByTestId("task-done-btn")
+    const button = screen.getByTestId("task-checkbox")
 
     return {
       span,
@@ -41,12 +41,12 @@ describe("<TaskItem />", () => {
     expect(span).not.toHaveStyle("text-decoration: line-through;")
   })
 
-  it("calls onCompleteTask", () => {
-    const onCompleteTask = jest.fn()
-    const { button } = setup({ onCompleteTask })
+  it("calls onToggleTask", () => {
+    const onToggleTask = jest.fn()
+    const { button } = setup({ onToggleTask })
 
     fireEvent.click(button)
 
-    expect(onCompleteTask).toBeCalledWith(sampleTask.id)
+    expect(onToggleTask).toBeCalledWith(sampleTask.id)
   })
 })

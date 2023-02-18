@@ -1,6 +1,7 @@
 import React from "react"
 import TaskList from "./TaskList"
 import { render, screen, fireEvent } from "@testing-library/react"
+
 import { Task } from "src/types/Task"
 
 describe("<TaskList />", () => {
@@ -18,7 +19,7 @@ describe("<TaskList />", () => {
   ]
   const defaultProps = {
     tasks: sampleTasks,
-    onCompleteTask: () => {},
+    onToggleTask: () => {},
   }
 
   it("renders tasks properly", () => {
@@ -27,12 +28,12 @@ describe("<TaskList />", () => {
     screen.getByText(sampleTasks[1].text)
   })
 
-  it("calls onCompleteTask", () => {
-    const onCompleteTask = jest.fn()
-    render(<TaskList {...defaultProps} onCompleteTask={onCompleteTask} />)
+  it("calls onToggleTask", () => {
+    const onToggleTask = jest.fn()
+    render(<TaskList {...defaultProps} onToggleTask={onToggleTask} />)
 
-    // Click on the first done button
-    fireEvent.click(screen.getAllByText("Done")[0])
-    expect(onCompleteTask).toBeCalledWith(sampleTasks[0].id)
+    // Click on the first checkbox
+    fireEvent.click(screen.getAllByTestId("task-checkbox")[0])
+    expect(onToggleTask).toBeCalledWith(sampleTasks[0].id)
   })
 })

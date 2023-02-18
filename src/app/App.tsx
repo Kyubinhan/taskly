@@ -35,11 +35,11 @@ const App: React.FC<Props> = ({ tasks: defaultTasks }) => {
 
     setTasks((tasks) => [...tasks, newTask])
   }
-  const onCompleteTask = (id: string) => {
+  const onToggleTask = (id: string) => {
     setTasks((tasks) =>
       tasks.map((t) => {
         if (t.id === id) {
-          return { ...t, completed: true }
+          return { ...t, completed: !t.completed }
         }
 
         return t
@@ -78,7 +78,7 @@ const App: React.FC<Props> = ({ tasks: defaultTasks }) => {
           />
         </div>
         <ActiveTaskCount count={activeTaskCount} />
-        <TaskList tasks={tasksToDisplay} onCompleteTask={onCompleteTask} />
+        <TaskList tasks={tasksToDisplay} onToggleTask={onToggleTask} />
       </div>
     </>
   )

@@ -9,13 +9,13 @@ import { Task } from "src/types/Task"
 
 interface Props {
   task: Task
-  onCompleteTask: (id: string) => void
+  onToggleTask: (id: string) => void
 }
 
-const TaskItem: React.FC<Props> = ({ task, onCompleteTask }) => {
+const TaskItem: React.FC<Props> = ({ task, onToggleTask }) => {
   const { id, text, completed } = task
   const onClick = () => {
-    onCompleteTask(id)
+    onToggleTask(id)
   }
 
   return (
@@ -30,7 +30,7 @@ const TaskItem: React.FC<Props> = ({ task, onCompleteTask }) => {
             inputProps={{
               "aria-labelledby": text,
               // @ts-expect-error
-              "data-testid": "task-done-btn",
+              "data-testid": "task-checkbox",
             }}
           />
         </ListItemIcon>
