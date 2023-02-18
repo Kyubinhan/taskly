@@ -33,6 +33,10 @@ describe("<App />", () => {
       },
     })
   }
+  const selectFilterOption = (option: TaskFilterOption) => {
+    userEvent.click(screen.getByTestId("task-filter-select"))
+    userEvent.click(screen.getByRole("option", { name: option }))
+  }
 
   beforeEach(() => {
     localStorage.clear()
@@ -71,16 +75,12 @@ describe("<App />", () => {
     screen.getByText("task 2")
 
     // Display active tasks only
-    userEvent.selectOptions(screen.getByTestId("task-filter-select"), [
-      TaskFilterOption.ACTIVE,
-    ])
+    selectFilterOption(TaskFilterOption.ACTIVE)
     screen.getByText("task 1")
     expect(screen.queryByTestId("task 2")).toBeFalsy()
 
     // Display completed tasks only
-    userEvent.selectOptions(screen.getByTestId("task-filter-select"), [
-      TaskFilterOption.COMPLETED,
-    ])
+    selectFilterOption(TaskFilterOption.COMPLETED)
     screen.getByText("task 2")
     expect(screen.queryByTestId("task 1")).toBeFalsy()
   })

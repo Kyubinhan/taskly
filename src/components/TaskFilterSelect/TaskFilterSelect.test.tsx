@@ -6,9 +6,12 @@ import { TaskFilterOption } from "src/types"
 import TaskFilterSelect from "./TaskFilterSelect"
 
 describe("<TaskFilterSelect />", () => {
-  const defaultProps = { onFilterChange: () => {} }
-  const setup = (props = defaultProps) => {
-    render(<TaskFilterSelect {...props} />)
+  const defaultProps = {
+    onFilterChange: () => {},
+    option: TaskFilterOption.ALL,
+  }
+  const setup = (props = {}) => {
+    render(<TaskFilterSelect {...defaultProps} {...props} />)
 
     const select = screen.getByTestId("task-filter-select")
 
@@ -23,22 +26,24 @@ describe("<TaskFilterSelect />", () => {
     expect(select).toBeTruthy()
   })
 
-  it("selects an option", () => {
+  it("selects an option", async () => {
     const { select } = setup()
 
-    userEvent.selectOptions(select, [TaskFilterOption.ALL])
-
-    expect(
-      screen.getByRole<HTMLOptionElement>("option", { name: "All" }).selected
-    ).toBe(true)
+    userEvent.click(select)
+    userEvent.click(
+      screen.getByRole("option", { name: TaskFilterOption.COMPLETED })
+    )
   })
 
   it("calls onFilterChange", () => {
     const onFilterChange = jest.fn()
     const { select } = setup({ onFilterChange })
 
-    userEvent.selectOptions(select, [TaskFilterOption.ALL])
+    userEvent.click(select)
+    userEvent.click(
+      screen.getByRole("option", { name: TaskFilterOption.COMPLETED })
+    )
 
-    expect(onFilterChange).toBeCalledWith(TaskFilterOption.ALL)
+    expect(onFilterChange).toBeCalledWith(TaskFilterOption.COMPLETED)
   })
 })

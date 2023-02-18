@@ -1,24 +1,35 @@
+import MenuItem from "@mui/material/MenuItem"
+import Select, { SelectChangeEvent } from "@mui/material/Select"
 import React from "react"
 
 import { TaskFilterOption } from "src/types"
 
 interface Props {
+  option: TaskFilterOption
   onFilterChange: (option: TaskFilterOption) => void
 }
 
-const TaskFilterSelect: React.FC<Props> = ({ onFilterChange }) => {
-  const onChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
+const TaskFilterSelect: React.FC<Props> = ({ option, onFilterChange }) => {
+  const onChange = (e: SelectChangeEvent) => {
     const option = e.target.value as TaskFilterOption
 
     onFilterChange(option)
   }
 
   return (
-    <select data-testid="task-filter-select" onChange={onChange}>
-      <option value={TaskFilterOption.ALL}>All</option>
-      <option value={TaskFilterOption.ACTIVE}>Active</option>
-      <option value={TaskFilterOption.COMPLETED}>Completed</option>
-    </select>
+    <Select
+      value={option}
+      onChange={onChange}
+      size="small"
+      SelectDisplayProps={{
+        // @ts-expect-error
+        "data-testid": "task-filter-select",
+      }}
+    >
+      <MenuItem value={TaskFilterOption.ALL}>All</MenuItem>
+      <MenuItem value={TaskFilterOption.ACTIVE}>Active</MenuItem>
+      <MenuItem value={TaskFilterOption.COMPLETED}>Completed</MenuItem>
+    </Select>
   )
 }
 
