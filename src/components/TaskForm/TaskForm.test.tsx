@@ -32,7 +32,7 @@ describe("<TaskForm />", () => {
       },
     })
 
-    expect(input).toHaveAttribute("value", "do something")
+    expect(input).toHaveValue("do something")
   })
 
   it("calls onAddTask and clears input", () => {
@@ -47,6 +47,6 @@ describe("<TaskForm />", () => {
     fireEvent.click(button)
 
     expect(onAddTask).toBeCalledWith("do something")
-    expect(input).toHaveAttribute("value", "")
+    expect(input).toHaveValue("")
   })
 })

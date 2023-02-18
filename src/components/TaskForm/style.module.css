@@ -1,0 +1,10 @@
+.form {
+  display: flex;
+  align-items: flex-end;
+}
+
+.button {
+  min-width: 40px !important;
+  height: 40px;
+  margin-left: 2px !important;
+}
