@@ -1,6 +1,10 @@
+import List from "@mui/material/List"
 import React from "react"
+
 import { Task } from "src/types/Task"
-import TaskItem from "../TaskItem"
+import TaskItem from "src/components/TaskItem"
+
+import styles from "./style.module.css"
 
 interface Props {
   tasks: Task[]
@@ -9,11 +13,11 @@ interface Props {
 
 const TaskList: React.FC<Props> = ({ tasks, onCompleteTask }) => {
   return (
-    <ul data-testid="task-list">
+    <List className={styles.list} data-testid="task-list" disablePadding>
       {tasks.map((task) => (
         <TaskItem key={task.id} task={task} onCompleteTask={onCompleteTask} />
       ))}
-    </ul>
+    </List>
   )
 }
 

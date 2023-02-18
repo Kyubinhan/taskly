@@ -13,7 +13,7 @@ describe("<TaskItem />", () => {
   const initialProps = { task: sampleTask, onCompleteTask: () => {} }
   const setup = (props = {}) => {
     render(<TaskItem {...initialProps} {...props} />)
-    const span = screen.getByTestId("task")
+    const span = screen.getByTestId("task-text")
     const button = screen.getByTestId("task-done-btn")
 
     return {
