@@ -88,11 +88,11 @@ describe("<App />", () => {
   it("displays active task count", () => {
     render(<App tasks={defaultTasks} />)
 
-    screen.getByText(/active tasks: 1/i)
+    screen.getByText(/1 pending task/i)
 
     addTask("task 3")
 
-    screen.getByText(/active tasks: 2/i)
+    screen.getByText(/2 pending task/i)
   })
 
   it("searchs tasks by keyword", () => {

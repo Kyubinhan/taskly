@@ -1,5 +1,6 @@
 import React from "react"
 import { render, screen } from "@testing-library/react"
+
 import ActiveTaskCount from "./ActiveTaskCount"
 
 describe("<ActiveTaskCount />", () => {
@@ -23,6 +24,6 @@ describe("<ActiveTaskCount />", () => {
   it("displays active task count", () => {
     const { div } = setup({ count: 1 })
 
-    expect(div).toHaveTextContent("# of active tasks: 1")
+    expect(div).toHaveTextContent("You have 1 pending task(s).")
   })
 })
