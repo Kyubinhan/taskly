@@ -24,6 +24,6 @@ describe("<ActiveTaskCount />", () => {
   it("displays active task count", () => {
     const { div } = setup({ count: 1 })
 
-    expect(div).toHaveTextContent("You have 1 pending task(s).")
+    expect(div).toHaveTextContent("You have 1 active task(s).")
   })
 })

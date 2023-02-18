@@ -14,7 +14,7 @@ const ActiveTaskCount: React.FC<Props> = ({ count }) => {
       data-testid="active-task-count"
       variant="body2"
     >
-      You have {count} pending task(s).
+      You have {count} active task(s).
     </Typography>
   )
 }
