@@ -10,7 +10,7 @@ import ActiveTaskCount from "src/components/ActiveTaskCount"
 import TaskSearchInput from "src/components/TaskSearchInput"
 import TopBar from "src/components/TopBar"
 
-import "./style.css"
+import styles from "./style.module.css"
 
 interface Props {
   tasks?: Task[] // for testing purpose
@@ -68,13 +68,18 @@ const App: React.FC<Props> = ({ tasks: defaultTasks }) => {
   return (
     <>
       <TopBar />
-      <section>
+      <div className={styles.contents}>
         <TaskForm onAddTask={onAddTask} />
-        <TaskSearchInput onSearchTask={setSearch} />
-        <TaskFilterSelect onFilterChange={setFilterOption} />
+        <div className={styles.filters}>
+          <TaskSearchInput onSearchTask={setSearch} />
+          <TaskFilterSelect
+            option={filterOption}
+            onFilterChange={setFilterOption}
+          />
+        </div>
         <ActiveTaskCount count={activeTaskCount} />
         <TaskList tasks={tasksToDisplay} onCompleteTask={onCompleteTask} />
-      </section>
+      </div>
     </>
   )
 }

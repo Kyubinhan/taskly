@@ -1,0 +1,14 @@
+.contents {
+  max-width: 480px;
+  margin: 0 auto;
+  padding: 0 8px;
+}
+
+.filters {
+  border-top: 1px solid rgba(0, 0, 0, 0.12);
+  margin-top: 12px;
+  padding-top: 12px;
+  display: grid;
+  grid-template-columns: auto 126px; /* 126px is for when Completed selected*/
+  gap: 4px;
+}
