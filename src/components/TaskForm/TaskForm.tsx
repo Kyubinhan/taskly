@@ -23,12 +23,13 @@ const TaskForm: React.FC<Props> = ({ onAddTask }) => {
   return (
     <form className={styles.form} data-testid="task-form" onSubmit={onSubmit}>
       <TextField
+        autoFocus
         label="New Task"
         size="small"
         fullWidth
         value={text}
         onChange={onChange}
-        placeholder="Insert a new task"
+        placeholder="Enter task here"
         multiline
         maxRows={3}
         inputProps={{
