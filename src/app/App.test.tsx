@@ -3,7 +3,7 @@ import { render, screen, fireEvent } from "@testing-library/react"
 import userEvent from "@testing-library/user-event"
 
 import App from "src/app"
-import { TaskFilterOption } from "src/types"
+import { TaskFilterOption, LocalStorageKey } from "src/types"
 
 describe("<App />", () => {
   const defaultTasks = [
@@ -95,21 +95,29 @@ describe("<App />", () => {
     screen.getByText(/2 active task/i)
   })
 
-  it("searchs tasks by keyword", () => {
+  it("searches tasks by keyword", () => {
     render(<App tasks={defaultTasks} />)
     screen.getByText("task 1")
     screen.getByText("task 2")
 
-    // Search by keyword 'task 2'
+    // Search by keywords
     searchTask("task 2")
     expect(screen.queryByText("task 1")).toBeFalsy()
     screen.getByText("task 2")
 
-    // Search by keyword 'fun task'
+    // Case insensitive search
     addTask("Fun task")
     searchTask("fun task")
     expect(screen.queryByText("task 1")).toBeFalsy()
     expect(screen.queryByText("task 2")).toBeFalsy()
     screen.getByText("Fun task")
+  })
+
+  it("loads tasks stored in local storage", () => {
+    localStorage.setItem(LocalStorageKey.TASKS, JSON.stringify(defaultTasks))
+    render(<App />)
+
+    screen.getByText("task 1")
+    screen.getByText("task 2")
   })
 })
