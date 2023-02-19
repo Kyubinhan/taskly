@@ -1,0 +1,15 @@
+{
+  "files": {
+    "main.css": "/taskly/static/css/main.8608f664.css",
+    "main.js": "/taskly/static/js/main.0bf9da2d.js",
+    "static/js/787.22009ea4.chunk.js": "/taskly/static/js/787.22009ea4.chunk.js",
+    "index.html": "/taskly/index.html",
+    "main.8608f664.css.map": "/taskly/static/css/main.8608f664.css.map",
+    "main.0bf9da2d.js.map": "/taskly/static/js/main.0bf9da2d.js.map",
+    "787.22009ea4.chunk.js.map": "/taskly/static/js/787.22009ea4.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.8608f664.css",
+    "static/js/main.0bf9da2d.js"
+  ]
+}
