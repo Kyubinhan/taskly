@@ -9,6 +9,7 @@ import TaskFilterSelect from "src/components/TaskFilterSelect"
 import ActiveTaskCount from "src/components/ActiveTaskCount"
 import TaskSearchInput from "src/components/TaskSearchInput"
 import TopBar from "src/components/TopBar"
+import { getTaskSearchPattern } from "src/utils"
 
 import styles from "./style.module.css"
 
@@ -47,14 +48,9 @@ const App: React.FC<Props> = ({ tasks: defaultTasks }) => {
     )
   }
 
-  const searchPattern = search
-    .split("")
-    .map((x) => {
-      return `(?=.*${x})`
-    })
-    .join("")
   const tasksToDisplay = tasks.filter((t) => {
-    if (!t.text.match(new RegExp(searchPattern, "gi"))) return false
+    const isKeywordFound = t.text.match(getTaskSearchPattern(search))
+    if (!isKeywordFound) return false
 
     if (filterOption === TaskFilterOption.ALL) {
       return true
