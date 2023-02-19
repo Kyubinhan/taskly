@@ -15,7 +15,7 @@ const TaskSearchInput: React.FC<Props> = ({ onSearchTask }) => {
   return (
     <TextField
       onChange={onChange}
-      placeholder="Search tasks"
+      placeholder="Search by keywords"
       size="small"
       inputProps={{
         "data-testid": "task-search-input",
