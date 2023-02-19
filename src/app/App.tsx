@@ -9,7 +9,7 @@ import TaskFilterSelect from "src/components/TaskFilterSelect"
 import ActiveTaskCount from "src/components/ActiveTaskCount"
 import TaskSearchInput from "src/components/TaskSearchInput"
 import TopBar from "src/components/TopBar"
-import { getTaskSearchPattern } from "src/utils"
+import { getTaskSearchPattern, isTaskActive, isTaskCompleted } from "src/utils"
 
 import styles from "./style.module.css"
 
@@ -52,14 +52,14 @@ const App: React.FC<Props> = ({ tasks: defaultTasks }) => {
     const isKeywordFound = t.text.match(getTaskSearchPattern(search))
     if (!isKeywordFound) return false
 
-    if (filterOption === TaskFilterOption.ALL) {
-      return true
+    if (filterOption === TaskFilterOption.COMPLETED) {
+      return isTaskCompleted(t)
     } else if (filterOption === TaskFilterOption.ACTIVE) {
-      return t.completed === false
+      return isTaskActive(t)
     }
-    return t.completed === true
+    return true
   })
-  const activeTaskCount = tasks.filter((t) => t.completed === false).length
+  const activeTaskCount = tasks.filter(isTaskActive).length
 
   return (
     <>
