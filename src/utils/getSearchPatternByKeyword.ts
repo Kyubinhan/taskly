@@ -3,11 +3,11 @@
  *
  * reference: https://levelup.gitconnected.com/use-regex-and-javascript-to-improve-search-results-870932050d08
  *
- * @param search a string that user inputs
+ * @param keyword a string that user inputs
  * @returns a RegExp object to be matched against
  */
-export const getTaskSearchPattern = (search: string) => {
-  const pattern = search
+export const getSearchPatternByKeyword = (keyword: string) => {
+  const pattern = keyword
     .split("")
     .map((x) => {
       return `(?=.*${x})`

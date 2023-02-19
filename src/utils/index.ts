@@ -1,2 +1,2 @@
-export * from "./getTaskSearchPattern"
+export * from "./getSearchPatternByKeyword"
 export * from "./task"
